@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>01-Lab-SDLC.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="http://localhost:5500/res/css/markdown.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div style="margin-bottom: 20px;">
+<div class="header" style="background-color: #26679cff;">
+    <h3>Software Engineering Concepts</h3>
+    <h4>SE - Lab 01</h4>
+</div>
+</div>
+<div style="text-align: right; font-style: italic; margin-bottom: 20px;">
+    <p>Start date: <span style="color: #26679cff;">24 October, 2025.</span><br>
+    Due date: <span style="color: #26679cff;">29 October, 2025.</span> </p>
+</div>
+<h1 id="lab-overview">Lab Overview</h1>
+<p>This lab is designed to introduce you to the fundamental concepts of Software Engineering, focusing on the Software Development Life Cycle (SDLC).</p>
+<h1 id="practical-example-attendance-system-using-java">Practical Example: Attendance System Using Java</h1>
+<p>Let's apply each SDLC phase to develop an attendance system using Java:</p>
+<h2 id="1-requirement-analysis">1. Requirement Analysis</h2>
+<ul>
+<li><strong>Functional Requirements</strong>:
+<ul>
+<li>Record student attendance (present/absent)</li>
+<li>Generate attendance reports</li>
+<li>Manage student database</li>
+<li>Calculate attendance percentage</li>
+</ul>
+</li>
+<li><strong>Non-functional Requirements</strong>:
+<ul>
+<li>System should handle 500+ students</li>
+<li>Response time &lt; 2 seconds</li>
+<li>Data security and backup</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-design">2. Design</h2>
+<ul>
+<li><strong>Architecture</strong>: MVC (Model-View-Controller) pattern</li>
+<li><strong>Database Design</strong>:
+<ul>
+<li>Students table (id, name, email, course)</li>
+<li>Attendance table (student_id, date, status)</li>
+</ul>
+</li>
+<li><strong>UI Design</strong>: Swing-based desktop application</li>
+<li><strong>Class Design</strong>: Student, Attendance, AttendanceManager classes</li>
+</ul>
+<h2 id="3-implementation-coding">3. Implementation (Coding)</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>{
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> studentId;
+        <span class="hljs-keyword">private</span> String name;
+        <span class="hljs-keyword">private</span> String course;
+        <span class="hljs-comment">// constructors, getters, setters</span>
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AttendanceManager</span> </span>{
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">markAttendance</span><span class="hljs-params">(<span class="hljs-keyword">int</span> studentId, <span class="hljs-keyword">boolean</span> isPresent)</span> </span>{
+                <span class="hljs-comment">// Implementation logic</span>
+        }
+        
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">calculateAttendancePercentage</span><span class="hljs-params">(<span class="hljs-keyword">int</span> studentId)</span> </span>{
+                <span class="hljs-comment">// Calculate and return percentage</span>
+        }
+}
+</div></code></pre>
+<h2 id="4-testing">4. Testing</h2>
+<ul>
+<li><strong>Unit Testing</strong>: Test individual methods using JUnit</li>
+<li><strong>Integration Testing</strong>: Test database connectivity</li>
+<li><strong>System Testing</strong>: Test complete workflow</li>
+<li><strong>User Acceptance Testing</strong>: Teachers validate the system</li>
+</ul>
+<h2 id="5-deployment">5. Deployment</h2>
+<ul>
+<li>Package application as JAR file</li>
+<li>Install on school computers</li>
+<li>Configure database connections</li>
+<li>Train users on system usage</li>
+</ul>
+<h2 id="6-maintenance">6. Maintenance</h2>
+<ul>
+<li>Monitor system performance</li>
+<li>Fix bugs reported by users</li>
+<li>Add new features (SMS notifications, mobile app)</li>
+<li>Regular database backups and updates</li>
+</ul>
+<h1 id="your-tasks-to-complete">Your Tasks to Complete</h1>
+<p>Answer the following questions based on the SDLC phases and the practical example provided above.</p>
+<h2 id="questions">Questions</h2>
+<ol>
+<li>What is the purpose of the Requirement Analysis phase in the SDLC?</li>
+<li>How does the Design phase contribute to the overall success of a software project?</li>
+<li>Why is Testing considered a critical phase in the SDLC?</li>
+<li>What are the key activities involved in the Deployment phase?</li>
+<li>How does Maintenance ensure the long-term success of a software application?</li>
+</ol>
+<h2 id="analysis-questions">Analysis Questions</h2>
+<p>There are many ways to take the attendance of the students, such as:</p>
+<ul>
+<li>Manual attendance sheet</li>
+<li>Biometric systems (fingerprint/iris scan)</li>
+<li>RFID attendance systems</li>
+<li>Mobile apps for self-check-in</li>
+<li>QR code-based attendance</li>
+</ul>
+<p>Choose any two methods and compare them based on the following criteria:</p>
+<ol>
+<li>Accuracy</li>
+<li>Ease of Use</li>
+<li>Implementation Cost</li>
+<li>Time Efficiency</li>
+<li>Student Privacy</li>
+</ol>
+<p>Provide a brief analysis of the advantages and disadvantages of each method you choose.</p>
+<h1 id="submission-guidelines">Submission Guidelines</h1>
+<ul>
+<li>Submit your answers in a well-formatted document (PDF or Word).</li>
+<li>Include code snippets where applicable.</li>
+<li>Ensure clarity and conciseness in your explanations.</li>
+</ul>
+
+</body>
+</html>
